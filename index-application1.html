@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Application</title>
+  <link rel="stylesheet" href="styles-app1.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="back-ground">
+    <div class="card">
+      <h1 style="margin-top: 0px; margin-bottom: 0px;">Application</h1>
+
+      <form class="" action="/application-next" method="post">
+        <div><input type="text" class="search-bar" placeholder="Name" name="nameApp1" id="name" required></div>
+        <div><input type="email" class="search-bar" placeholder="Gmail" name="gmailApp1" id="email" required></div>
+        <div><input type="text" class="search-bar" placeholder="Occupation" name="occupationApp1" id="occu" required></div>
+        <div><input type="number" class="search-bar" placeholder="Mobile" name="mobileApp1" id="number" maxlength="10" min="10" required></div>
+        <div class="radio">
+          <form class="" action="index.html" method="post">
+            <label class="Q-text">Do you have private health insurance?</label>
+            <input class="" type="radio" name="health" value="yes">
+            <label>Yes</label>
+
+            <input class="" type="radio" name="health" value="no">
+            <label>No</label>
+          </form>
+        </div>
+        <div class="radio">
+          <form class="" action="index.html" method="post">
+            <label class="Q-text">Gender</label>
+            <input class="" type="radio" name="gender" value="male">
+            <label>Male</label>
+
+            <input class="" type="radio" name="gender" value="female">
+            <label>Female</label>
+          </form>
+        </div>
+        <div class="res-input"><label class="Q-text">How did you find out about our Gym?</label>
+        <input type="text" class="res" value="" name="findOutApp1" id="findOut" required></div>
+        <div>
+          <label class="Q-text">Which Membership are you signing up for:</label>
+          <select class="search-bar" name="planApp1" id="subscriptions" required>
+            <option value="" disabled selected>Available subscriptions</option>
+            <option value="1">1399/month</option>
+            <option value="2">3999 for 3 months</option>
+            <option value="2">5999 for 6 months</option>
+          </select>
+        </div>
+        <!-- <button type="button" name="button">Next</button> -->
+        <a href="/application-next"><button type="submit" name="button" id="next">Next</button></a>
+
+      </form>
+      <!-- <div><input type="text" class="search-bar" placeholder="Name"></div>
+      <div><input type="text" class="search-bar" placeholder="Gmail"></div>
+      <div><input type="text" class="search-bar" placeholder="Occupation"></div>
+      <div><input type="text" class="search-bar" placeholder="Mobile"></div>
+      <div class="radio">
+        <form class="" action="index.html" method="post">
+          <label class="Q-text">Do you have private health insurance?</label>
+          <input class="" type="radio" name="" value="yes">
+          <label>Yes</label>
+
+          <input class="" type="radio" name="" value="no">
+          <label>No</label>
+        </form>
+      </div>
+      <div class="radio">
+        <form class="" action="index.html" method="post">
+          <label class="Q-text">Gender</label>
+          <input class="" type="radio" name="gender" value="male">
+          <label>Male</label>
+
+          <input class="" type="radio" name="gender" value="female">
+          <label>Female</label>
+        </form>
+      </div>
+      <div class="res-input"><label class="Q-text">How did you find out about our Gym?</label>
+      <input type="text" class="res" value=""></div>
+      <div>
+        <label class="Q-text">Which Membership are you signing up for:</label>
+        <select class="search-bar" name="">
+          <option value="" disabled selected>Available subscriptions</option>
+          <option value="1">1399/month</option>
+          <option value="2">3999 for 3 months</option>
+          <option value="2">5999 for 6 months</option>
+        </select>
+      </div>
+      <!-- <button type="button" name="button">Next</button> -->
+      <!-- <a href="D:\Vijeth\OneDrive\Desktop\Version 1.0\index-application2.html"><button type="button" name="button">Next</button></a> -->
+
+      <!-- <div><input type="text" class="search-bar" placeholder="Do you have private health insurance? Y / N"></div>
+        <div><input type="text" class="search-bar" placeholder="Which Membership are you signing up for:"></div>
+        <div><input type="text" class="search-bar" placeholder="Search"></div>
+        <div><input type="text" class="search-bar" placeholder="Search"></div>
+        <div><input type="text" class="search-bar" placeholder="Search"></div>
+        <div><input type="text" class="search-bar" placeholder="Search"></div>
+        <div><input type="text" class="search-bar" placeholder="Search"></div>
+        <div><input type="text" class="search-bar" placeholder="Search"></div>
+        <div><input type="text" class="search-bar" placeholder="Search"></div> -->
+    </div>
+  </div>
+    <script>
+    // const form = document.getElementsByTagName('form');
+    const nextBtn=document.getElmentById('next');
+    // form.addEventListener('submit',(e)=>{
+    //   e.preventDefault();
+    // })
+
+        function getCheckedRadioValue(radioGroupName) {
+       var rads = document.getElementsByName(radioGroupName),
+           i;
+       for (i=0; i < rads.length; i++)
+          if (rads[i].checked)
+              return rads[i].value;
+       return null; // or undefined, or your preferred default for none checked
+    }
+    var name=document.getElmentById('name').value;
+    var email=document.getElmentById('email').value;
+    var occu=document.getElmentById('occu').value;
+    var number=document.getElmentById('number').value;
+    var findOut=document.getElmentById('findOut').value;
+    var subscriptions=document.getElmentById('subscriptions').value;
+    var genderValue = getCheckedRadioValue("gender");
+    var insuranceValue=getCheckedRadioValue("health");
+
+
+    next.addEventListener('click',async()=>{
+      console.log('clicked',{name,email,occu,number,findout,subscriptions,genderValue,insuranceValue});
+        var res=fetch('/application',{
+          method:'POST',
+          header:{Content-type:"application/json"},
+          body:JSON.stringify({name,email,occu,number,findout,subscriptions,genderValue,insuranceValue})
+        })
+    })
+
+    </script>
+  </body>
+  </html>
